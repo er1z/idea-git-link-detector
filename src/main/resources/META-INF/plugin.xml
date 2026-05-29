@@ -1,0 +1,29 @@
+<idea-plugin>
+    <id>pl.eriz.gitlinkdetector</id>
+    <name>Git Link Detector</name>
+    <vendor url="https://github.com/er1z">Przemysław eRIZ Pawliczuk</vendor>
+
+    <description><![CDATA[
+        Detects URLs printed to IntelliJ's git console output and surfaces them as clickable balloon notifications.
+        Handles device-flow login URLs, pull request creation links, and other actionable git server responses.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.vcs</depends>
+    <depends>Git4Idea</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService
+            serviceImplementation="pl.eriz.gitlinkdetector.settings.GitLinkDetectorSettings"/>
+        <applicationConfigurable
+            parentId="tools"
+            instance="pl.eriz.gitlinkdetector.settings.GitLinkDetectorConfigurable"
+            id="pl.eriz.gitlinkdetector.settings"
+            displayName="Git Link Detector"/>
+        <notificationGroup id="GitLinkDetector" displayType="BALLOON"/>
+        <projectService
+            serviceInterface="git4idea.commands.GitCommandOutputPrinter"
+            serviceImplementation="pl.eriz.gitlinkdetector.GitCommandOutputInterceptor"
+            overrides="true"/>
+    </extensions>
+</idea-plugin>
