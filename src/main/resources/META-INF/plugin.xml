@@ -21,9 +21,6 @@
             id="pl.eriz.gitlinkdetector.settings"
             displayName="Git Link Detector"/>
         <notificationGroup id="GitLinkDetector" displayType="BALLOON"/>
-        <projectService
-            serviceInterface="git4idea.commands.GitCommandOutputPrinter"
-            serviceImplementation="pl.eriz.gitlinkdetector.GitCommandOutputInterceptor"
-            overrides="true"/>
+        <consoleFilterProvider implementation="pl.eriz.gitlinkdetector.GitLinkConsoleFilterProvider"/>
     </extensions>
 </idea-plugin>
