@@ -7,7 +7,11 @@ import com.intellij.notification.NotificationType
 import com.intellij.openapi.project.Project
 
 object BalloonNotifier {
+    private var lastUrl: String? = null
+
     fun notify(project: Project?, url: String, label: String) {
+        if (url == lastUrl) return
+        lastUrl = url
         NotificationGroupManager.getInstance()
             .getNotificationGroup("GitLinkDetector")
             .createNotification("Git Link Detected", "$label: $url", NotificationType.INFORMATION)
